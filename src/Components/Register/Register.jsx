@@ -12,7 +12,7 @@ const Register = () => {
         reset,
         formState: { errors },
     } = useForm();
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
 
     const onSubmit = data => {
@@ -20,15 +20,22 @@ const Register = () => {
         createUser(data.email, data.password)
             .then(reault => {
                 const loggedUSer = reault.user;
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Registration Successful",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                reset();
                 console.log(loggedUSer);
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        console.log('user info updated');
+                        reset();
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Registration Successful",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             })
     };
     return (

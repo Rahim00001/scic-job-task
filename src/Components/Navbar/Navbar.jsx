@@ -57,11 +57,12 @@ const Navbar = () => {
                         <div tabIndex={0}>
                             <div className="avatar">
                                 <div className="w-10 mr-4 rounded-full  ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    <img src={user?.photoURL} />
                                 </div>
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <li className="text-center text-lg font-bold mb-1">{user?.displayName}</li>
                             <li className="text-center text-lg mb-1">{user?.email}</li>
                             <li>
                                 {
