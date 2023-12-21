@@ -6,7 +6,7 @@ import loginAnim from "../../../public/login.json"
 import Lottie from "lottie-react";
 
 const Login = () => {
-    const { logIn } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -19,7 +19,7 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
-        logIn(email, password)
+        login(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);

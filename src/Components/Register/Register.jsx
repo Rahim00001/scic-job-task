@@ -2,6 +2,8 @@ import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import registerAnim from "../../../public/register.json"
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 const Register = () => {
     const {
         register,
@@ -9,8 +11,16 @@ const Register = () => {
         reset,
         formState: { errors },
     } = useForm();
+    const { createUser } = useContext(AuthContext);
+
+
     const onSubmit = data => {
         console.log(data)
+        createUser(data.email, data.password)
+            .then(reault => {
+                const loggedUSer = reault.user;
+                console.log(loggedUSer);
+            })
     };
     return (
         <div>

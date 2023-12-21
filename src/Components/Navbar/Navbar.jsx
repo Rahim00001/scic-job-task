@@ -1,12 +1,36 @@
+import { useContext } from "react";
 import { CiLogin, CiLogout } from "react-icons/ci";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    console.log(user);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "LogOut SuccessFully",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
     const navlinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About Us</NavLink></li>
         <li><NavLink to='/contact'>Contact</NavLink></li>
-        <li><NavLink to='/login'>Login</NavLink></li>
-        <li><NavLink to='/register'>Register</NavLink></li>
+        {
+            user ? <>
+                <li><Link onClick={handleLogOut} className="btn btn-ghost btn-sm font-normal">Logout</Link></li>
+            </> : <>
+                <li><NavLink to='/login'>Login</NavLink></li>
+            </>
+        }
     </>
     return (
         <div>
@@ -37,17 +61,21 @@ const Navbar = () => {
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li className="text-center text-lg mb-1 font-bold">Name</li>
-                            <li className="text-center text-lg mb-1">sample@gmail.com</li>
+                            <li className="text-center text-lg mb-1">{user?.email}</li>
                             <li>
-                                <button className="btn text-xl">
-                                    Logout
-                                    <CiLogin className="mt-1"></CiLogin>
-                                </button>
-                                <button className="btn text-xl">
-                                    Login
-                                    <CiLogout className="mt-1"></CiLogout>
-                                </button>
+                                {
+                                    user ? <>
+                                        <button onClick={handleLogOut} className="btn text-xl">
+                                            Logout
+                                            <CiLogin className="mt-1"></CiLogin>
+                                        </button>
+                                    </> : <>
+                                        <NavLink to='/login' className="btn text-xl">
+                                            Login
+                                            <CiLogout className="mt-1"></CiLogout>
+                                        </NavLink>
+                                    </>
+                                }
                             </li>
                         </ul>
                     </div>
