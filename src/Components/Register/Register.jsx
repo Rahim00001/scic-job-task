@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import registerAnim from "../../../public/register.json"
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 const Register = () => {
     const {
         register,
@@ -19,6 +20,14 @@ const Register = () => {
         createUser(data.email, data.password)
             .then(reault => {
                 const loggedUSer = reault.user;
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Registration Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                reset();
                 console.log(loggedUSer);
             })
     };
