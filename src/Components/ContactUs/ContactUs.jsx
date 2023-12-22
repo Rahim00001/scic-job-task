@@ -3,10 +3,10 @@ import contact from '../../../public/contact.json'
 import { BsSendFill } from "react-icons/bs";
 const ContactUs = () => {
     return (
-        <div id='contact' className="hero-content flex-col lg:flex-row justify-center items-center gap-1 max-w-screen-xl mx-auto">
-            <Lottie animationData={contact}></Lottie>
-            <div>
-                <h1 className="uppercase text-2xl mb-2 font-bold text-slate-600">Share your thouts</h1>
+        <div id='contact' className="hero-content flex-col lg:flex-row lg:mr-28 xl:mr-40 gap-1 max-w-screen-xl mx-auto">
+            <Lottie animationData={contact} className='mx-auto'></Lottie>
+            <div className='mx-auto'>
+                <h1 className="uppercase text-2xl mb-2 font-bold text-slate-600">Share your thoughts</h1>
                 <h1 className="text-6xl font-bold mb-5">Messege Us.</h1>
                 <div className="card shrink-0 w-[380px] max-w-sm shadow-2xl bg-base-100 border-l-4 border-b-4 border-gray-700">
                     <form className="card-body">

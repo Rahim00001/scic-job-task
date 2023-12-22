@@ -5,6 +5,7 @@ import registerAnim from "../../../public/register.json"
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import LoginByGoogle from "../GoogleLogin/LoginByGoogle";
 const Register = () => {
     const {
         register,
@@ -97,7 +98,8 @@ const Register = () => {
                                 <input type="submit" value="Register" className="btn bg-violet-600 text-white hover:bg-violet-800" />
                             </div>
                         </form>
-                        {/* <div className="divider divider-primary"></div> */}
+                        <LoginByGoogle></LoginByGoogle>
+                        <div className="divider divider-primary"></div>
                         <p className='text-center mb-3 -mt-3'><small>Already have an account? <Link to='/login' className='font-bold hover:underline'>Login Now</Link></small></p>
                     </div>
                 </div>
