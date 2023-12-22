@@ -1,3 +1,4 @@
+import Banner from "../Banner/Banner";
 import ContactUs from "../ContactUs/ContactUs";
 import Team from "../Team/Team";
 import UserTypes from "../UserTypes/UserTypes";
@@ -5,7 +6,7 @@ import UserTypes from "../UserTypes/UserTypes";
 const Home = () => {
     return (
         <div>
-            <h1 className="text-5xl text-center">This is home</h1>
+            <Banner></Banner>
             <UserTypes></UserTypes>
             <Team></Team>
             <ContactUs></ContactUs>
