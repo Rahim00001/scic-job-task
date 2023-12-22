@@ -3,7 +3,7 @@ import contact from '../../../public/contact.json'
 import { BsSendFill } from "react-icons/bs";
 const ContactUs = () => {
     return (
-        <div className="hero-content flex-col lg:flex-row justify-center items-center gap-1 max-w-screen-xl mx-auto">
+        <div id='contact' className="hero-content flex-col lg:flex-row justify-center items-center gap-1 max-w-screen-xl mx-auto">
             <Lottie animationData={contact}></Lottie>
             <div>
                 <h1 className="uppercase text-2xl mb-2 font-bold text-slate-600">Share your thouts</h1>
