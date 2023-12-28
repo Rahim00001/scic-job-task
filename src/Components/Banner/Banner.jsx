@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import bannerImg from '../../../public/Images/taskBanner.svg'
 const Banner = () => {
     return (
@@ -9,7 +10,7 @@ const Banner = () => {
                         <h1 className="text-6xl font-bold">Manage Work <br /> <span className='text-yellow-400'>Efficiency.</span></h1>
                         <p className="pt-6 pb-2 text-2xl font-bold">Plan, Track and Organise your work..</p>
                         <p className='text-lg font-normal pb-5'>An Intranet platform to Manage projects, organise work and focus on what’s most important.</p>
-                        <button className="btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white">Let’s Explore</button>
+                        <Link to="/dashboard"><button className="btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white">Let’s Explore</button></Link>
                     </div>
                 </div>
             </div>
