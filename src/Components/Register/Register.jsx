@@ -1,12 +1,14 @@
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import registerAnim from "../../../public/register.json"
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import LoginByGoogle from "../GoogleLogin/LoginByGoogle";
+import useAxios from "../../hooks/useAxios";
 const Register = () => {
+    const axiosPublic = useAxios();
     const {
         register,
         handleSubmit,
@@ -14,31 +16,66 @@ const Register = () => {
         formState: { errors },
     } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const onSubmit = data => {
-        console.log(data)
         createUser(data.email, data.password)
-            .then(reault => {
-                const loggedUSer = reault.user;
-                console.log(loggedUSer);
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        console.log('user info updated');
-                        reset();
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Registration Successful",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+                        // create user entry in the database
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosPublic.post('/user', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to database');
+                                    reset();
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "Registretion Successfully",
+                                        icon: "success"
+                                    });
+                                    navigate('/');
+                                }
+                            })
                     })
-                    .catch(error => {
-                        console.log(error);
-                    })
+                    .catch(error => console.log(error))
             })
     };
+
+
+
+    // const onSubmit = data => {
+    //     console.log(data)
+    //     createUser(data.email, data.password)
+    //         .then(reault => {
+    //             const loggedUSer = reault.user;
+    //             console.log(loggedUSer);
+    //             updateUserProfile(data.name, data.photoURL)
+    //                 .then(() => {
+    //                     console.log('user info updated');
+    //                     reset();
+    //                     Swal.fire({
+    //                         position: "top-end",
+    //                         icon: "success",
+    //                         title: "Registration Successful",
+    //                         showConfirmButton: false,
+    //                         timer: 1500
+    //                     });
+    //                 })
+    //                 .catch(error => {
+    //                     console.log(error);
+    //                 })
+    //         })
+    // };
+
+
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">

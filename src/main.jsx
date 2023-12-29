@@ -14,6 +14,9 @@ import AuthProvider from './providers/AuthProvider.jsx';
 import Register from './Components/Register/Register.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
 import PrivateRoute from './Components/Private/PrivateRoute.jsx';
+import UpdateTask from './Components/UpdateTask/UpdateTask.jsx';
+import Team from './Components/Team/Team.jsx';
+import ContactUs from './Components/ContactUs/ContactUs.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,8 +36,22 @@ const router = createBrowserRouter([
         element: <Register></Register>
       },
       {
+        path: '/team',
+        element: <Team></Team>
+      },
+      {
+        path: '/contact',
+        element: <ContactUs></ContactUs>
+      },
+      {
         path: '/dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        loader: () => fetch('http://localhost:5000/tasks')
+      },
+      {
+        path: '/updateTask/:id',
+        element: <UpdateTask></UpdateTask>,
+        loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`)
       }
     ]
   },

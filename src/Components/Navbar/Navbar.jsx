@@ -23,8 +23,12 @@ const Navbar = () => {
     const navlinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-        <li><a href="#team">Our Team</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><NavLink to='/team'>Our Team</NavLink></li>
+        <li><NavLink to='/contact'>Contact</NavLink></li>
+
+        {/* <li><a href="#team">Our Team</a></li>
+        <li><a href="#contact">Contact</a></li> */}
+
         {
             user ? <>
                 <li><Link onClick={handleLogOut} className="btn btn-ghost btn-sm font-normal">Logout</Link></li>

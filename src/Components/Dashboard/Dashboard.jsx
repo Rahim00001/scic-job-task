@@ -2,7 +2,14 @@ import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import taskAnim from "../../../public/taskAdd.json"
 import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
+import AllTasks from "../AllTasks/AllTasks";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 const Dashboard = () => {
+    const { user } = useContext(AuthContext);
+    console.log(user);
+    const tasks = useLoaderData()
     const {
         register,
         handleSubmit,
@@ -36,11 +43,20 @@ const Dashboard = () => {
     };
     return (
         <div>
-            <h2 className="text-6xl text-center">This is dashboard</h2>
+            <h2 className="text-3xl text-center" data-aos="fade-down">Welcome Back {user.displayName}</h2>
+            <div>
+                <div className="card card-side w-96 mx-auto my-20 bg-base-100 shadow-xl">
+                    <figure><img src={user?.photoURL} className="h-full w-full" alt="userImg" /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">{user?.displayName}</h2>
+                        <p className="text-xl">{user?.email}</p>
+                    </div>
+                </div>
+            </div>
             <div className="hero min-h-screen bg-base-100">
                 <div className="hero-content flex-col lg:flex-row justify-center items-center lg:gap-20">
-                    <div className="text-center lg:w-[700px] border">
-                        <h1 className="text-5xl font-bold border -mb-12 lg:-mb-16">Add new task!</h1>
+                    <div className="text-center lg:w-[700px]">
+                        <h1 className="text-5xl font-bold -mb-12 lg:-mb-16">Add new task!</h1>
                         <Lottie animationData={taskAnim}></Lottie>
                     </div>
                     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -79,6 +95,27 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <div>
+                <h1 className="text-center text-5xl font-bold mb-5">My Tasks: {tasks.length}</h1>
+                <div className="flex justify-around max-w-screen-lg mx-auto mb-10">
+                    <div>
+                        <h1 className="text-3xl font-semibold text-center mb-4 underline">To-Do</h1>
+                        {
+                            tasks.map(task => <AllTasks
+                                key={task._id}
+                                task={task}
+                            ></AllTasks>)
+                        }
+                    </div>
+                    <div>
+                        <h1 className="text-3xl font-semibold text-center mb-4 underline">Ongoing</h1>
+                    </div>
+                    <div>
+                        <h1 className="text-3xl font-semibold text-center mb-4 underline">Completed</h1>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 };
