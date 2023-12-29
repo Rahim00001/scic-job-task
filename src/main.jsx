@@ -46,12 +46,12 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/tasks')
+        loader: () => fetch('https://scic-job-task-server-rho.vercel.app/tasks')
       },
       {
         path: '/updateTask/:id',
         element: <UpdateTask></UpdateTask>,
-        loader: ({ params }) => fetch(`http://localhost:5000/tasks/${params.id}`)
+        loader: ({ params }) => fetch(`https://scic-job-task-server-rho.vercel.app/tasks/${params.id}`)
       }
     ]
   },

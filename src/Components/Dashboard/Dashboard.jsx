@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     const onSubmit = data => {
         console.log(data)
-        fetch('http://localhost:5000/tasks', {
+        fetch('https://scic-job-task-server-rho.vercel.app/tasks', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

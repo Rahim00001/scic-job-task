@@ -15,7 +15,7 @@ const UpdateTask = () => {
 
     const onSubmit = data => {
         console.log(data)
-        fetch(`http://localhost:5000/tasks/${_id}`, {
+        fetch(`https://scic-job-task-server-rho.vercel.app/tasks/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
